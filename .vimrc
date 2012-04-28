@@ -11,6 +11,15 @@ call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on       " enable detection, plugins and indenting in
 
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_jump=1
+let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Open NERDTree by default
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -72,6 +81,8 @@ set expandtab
 
 " indentation and autocmplete
 set cindent
+set smartindent
+set autoindent
 filetype plugin on
 set ofu=syntaxcomplete#Complete
 set nu
@@ -89,4 +100,12 @@ nmap <Leader>gl :GitLog<cr>
 nmap <Leader>ga :GitAdd<cr>
 nmap <Leader>gA :GitAdd <cfile><cr>
 nmap <Leader>gc :GitCommit<cr>
+
+
+"Pretty XML
+function! DoPrettyXML()
+  silent %!xmllint --format --nowarning -
+  1d
+endfunction
+command! PrettyXML call DoPrettyXML()
 

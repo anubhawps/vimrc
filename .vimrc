@@ -108,4 +108,7 @@ function! DoPrettyXML()
   1d
 endfunction
 command! PrettyXML call DoPrettyXML()
+map <leader>xt :PrettyXML<cr>
 
+"pretty json
+map <leader>jt <Esc>:%!json_xs -f json -t json-pretty<CR>
